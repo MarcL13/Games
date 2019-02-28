@@ -1,6 +1,7 @@
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
 import java.awt.geom.Ellipse2D;
 
 import javax.swing.JComponent;
@@ -36,6 +37,8 @@ public class WalkingMan extends JComponent
 			g2.fill(leftLeg);
 			g2.fill(rightLeg);
 		}
+		
+		
 		
 		
 	
