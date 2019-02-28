@@ -19,24 +19,24 @@ public class GameBoard extends JFrame
 
 		public void keyPressed(KeyEvent e)
 		{
-			while(e.getKeyCode() == KeyEvent.VK_RIGHT)
+			if(e.getKeyCode() == KeyEvent.VK_RIGHT)
 			{
-				man.setLocation(man.getX() + 1, man.getY());
+				man.setLocation(man.getX() + 5, man.getY());
 			}
 			
-			while(e.getKeyCode() == KeyEvent.VK_LEFT)
+			if(e.getKeyCode() == KeyEvent.VK_LEFT)
 			{
-				man.setLocation(man.getX() - 1, man.getY());
+				man.setLocation(man.getX() - 5, man.getY());
 			}
 			
-			while(e.getKeyCode() == KeyEvent.VK_UP)
+			if(e.getKeyCode() == KeyEvent.VK_UP)
 			{
-				man.setLocation(man.getX(), man.getY() + 1);
+				man.setLocation(man.getX(), man.getY() - 5);
 			}
 			
-			while(e.getKeyCode() == KeyEvent.VK_DOWN)
+			if(e.getKeyCode() == KeyEvent.VK_DOWN)
 			{
-				man.setLocation(man.getX(), man.getY() - 1);
+				man.setLocation(man.getX(), man.getY() + 5);
 			}
 		}
 
