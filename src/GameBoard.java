@@ -10,7 +10,7 @@ import javax.swing.Timer;
 public class GameBoard extends JFrame implements Updatable,ActionListener
 {
 	private WalkingMan man;
-	private ArrayList balls;
+	private ArrayList<Ball> balls;
 	
 	public GameBoard()
 	{
@@ -54,10 +54,7 @@ public class GameBoard extends JFrame implements Updatable,ActionListener
 				balls.add(newBall);
 				add(newBall);
 				
-				for(int i = balls.size(); i > 0; i--)
-				{
-					
-				}
+				
 			}
 
 		}
@@ -102,7 +99,22 @@ public class GameBoard extends JFrame implements Updatable,ActionListener
 	
 	public void actionPerformed(ActionEvent e)
 	{
+		for(Ball b : balls)
+		{
+			b.update();
+		
+		for(int i = balls.size() - 1; i >= 0; i--)
+		{
+			if(balls.get(i).getX() >= 510)
+			{
+				balls.remove(i);
+			}	
+		}
+		
+		}
+		
 		man.update();
+		
 		repaint();
 	}
 	
