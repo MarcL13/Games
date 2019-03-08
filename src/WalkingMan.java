@@ -11,6 +11,7 @@ public class WalkingMan extends JComponent
 	
 	private Ellipse2D.Double head;
 	private Rectangle leftArm, rightArm, leftLeg, rightLeg, body;
+	private int dx = 0, dy = 0;
 	
 	public WalkingMan(int x, int y)
 	{
@@ -25,18 +26,32 @@ public class WalkingMan extends JComponent
 		rightLeg = new Rectangle(20,35,8,15);
 	}
 	
+	public void setDx(int x)
+	{
+		dx = x;
+	}
 	
-		public void paintComponent(Graphics g)
-		{
-			Graphics2D g2 = (Graphics2D) g;
-			
-			g2.fill(head);
-			g2.fill(leftArm);
-			g2.fill(rightArm);
-			g2.fill(body);
-			g2.fill(leftLeg);
-			g2.fill(rightLeg);
-		}
+	public void setDy(int y)
+	{
+		dy = y;
+	}
+	
+	public void update()
+	{
+		setLocation(getX() + dx, getY() + dy);
+	}
+	
+	
+	public void paintComponent(Graphics g)
+	{			
+		Graphics2D g2 = (Graphics2D) g;
+		g2.fill(head);
+		g2.fill(leftArm);
+		g2.fill(rightArm);			
+		g2.fill(body);
+		g2.fill(leftLeg);
+		g2.fill(rightLeg);
+	}
 		
 		
 		

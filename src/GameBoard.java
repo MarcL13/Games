@@ -1,18 +1,27 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.Timer;
 
-public class GameBoard extends JFrame
+public class GameBoard extends JFrame implements Updatable,ActionListener
 {
+	private WalkingMan man;
+	private ArrayList balls;
+	
 	public GameBoard()
 	{
 	setTitle("Walking Man");
 	setBounds(400,500,500,500);
 	setLayout(null);
 	
-	WalkingMan man = new WalkingMan(10,10);
+	man = new WalkingMan(10,10);
 	add(man);
+	
+	balls = new ArrayList<Ball>();
 	
 	addKeyListener(new KeyListener()
 	{
@@ -21,29 +30,60 @@ public class GameBoard extends JFrame
 		{
 			if(e.getKeyCode() == KeyEvent.VK_RIGHT)
 			{
-				man.setLocation(man.getX() + 5, man.getY());
+				man.setDx(3);
 			}
 			
-			if(e.getKeyCode() == KeyEvent.VK_LEFT)
+			else if(e.getKeyCode() == KeyEvent.VK_LEFT)
 			{
-				man.setLocation(man.getX() - 5, man.getY());
+				man.setDx(-3);
 			}
 			
-			if(e.getKeyCode() == KeyEvent.VK_UP)
+			else if(e.getKeyCode() == KeyEvent.VK_UP)
 			{
-				man.setLocation(man.getX(), man.getY() - 5);
+				man.setDy(-3);
 			}
 			
-			if(e.getKeyCode() == KeyEvent.VK_DOWN)
+			else if(e.getKeyCode() == KeyEvent.VK_DOWN)
 			{
-				man.setLocation(man.getX(), man.getY() + 5);
+				man.setDy(3);
 			}
+			
+			else if(e.getKeyCode() == KeyEvent.VK_SPACE)
+			{
+				Ball newBall = new Ball(man.getX(), man.getY());
+				balls.add(newBall);
+				add(newBall);
+				
+				for(int i = balls.size(); i > 0; i--)
+				{
+					
+				}
+			}
+
 		}
 
 		
 		public void keyReleased(KeyEvent e)
 		{
+			if(e.getKeyCode() == KeyEvent.VK_RIGHT)
+			{
+				man.setDx(0);
+			}
 			
+			else if(e.getKeyCode() == KeyEvent.VK_LEFT)
+			{
+				man.setDx(0);
+			}
+			
+			else if(e.getKeyCode() == KeyEvent.VK_UP)
+			{
+				man.setDy(0);
+			}
+			
+			else if(e.getKeyCode() == KeyEvent.VK_DOWN)
+			{
+				man.setDy(0);
+			}
 		}
 
 		
@@ -53,9 +93,17 @@ public class GameBoard extends JFrame
 		}
 		
 	});
+	Timer t1 = new Timer(1000/60, this);
+	t1.start();
 	
 	setVisible(true);
 	setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+	}
+	
+	public void actionPerformed(ActionEvent e)
+	{
+		man.update();
+		repaint();
 	}
 	
 	public static void main(String args[])
@@ -63,4 +111,14 @@ public class GameBoard extends JFrame
 		new WalkingMan(10,10);
 		new GameBoard();
 	}
+
+	@Override
+	public void update()
+	{
+		
+	}
+
+
+
+	
 }
