@@ -30,7 +30,7 @@ public class GameBoard extends JFrame implements Updatable,ActionListener
 		{
 			if(e.getKeyCode() == KeyEvent.VK_RIGHT)
 			{
-				man.setDx(3);
+				man.setDx(3);	
 			}
 			
 			else if(e.getKeyCode() == KeyEvent.VK_LEFT)
@@ -48,7 +48,7 @@ public class GameBoard extends JFrame implements Updatable,ActionListener
 				man.setDy(3);
 			}
 			
-			else if(e.getKeyCode() == KeyEvent.VK_SPACE)
+			if(e.getKeyCode() == KeyEvent.VK_SPACE)
 			{
 				Ball newBall = new Ball(man.getX(), man.getY());
 				balls.add(newBall);
@@ -102,18 +102,36 @@ public class GameBoard extends JFrame implements Updatable,ActionListener
 		for(Ball b : balls)
 		{
 			b.update();
-		
+		}
 		for(int i = balls.size() - 1; i >= 0; i--)
 		{
 			if(balls.get(i).getX() >= 510)
 			{
+				remove(balls.get(i));
 				balls.remove(i);
 			}	
 		}
 		
+		man.update();
+		if(man.getX() < 0)
+		{
+			man.setLocation(0,man.getY());
+		}
+		if(man.getX() > 448)
+		{
+			man.setLocation(448,man.getY());
+		}
+		if(man.getY() < 0)
+		{
+			man.setLocation(man.getX(), 0);
+		}
+		if(man.getY() > 394)
+		{
+			man.setLocation(man.getX(), 394);
 		}
 		
-		man.update();
+		
+		
 		
 		repaint();
 	}
